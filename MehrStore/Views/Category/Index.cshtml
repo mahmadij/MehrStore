@@ -1,7 +1,32 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-<h1>List of Categories:</h1>
-<button asp-controller="Category" asp-action="Category">Show Category</button>
+﻿@using MehrStore
+@using MehrStore.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model List<Category>
+<div class="row pt-4 pb-3">
+    <div class="col-6">
+        <h1>List of Categories:</h1>
+    </div>
+    <div class="col-6">
+        <a class="button button-primary" asp-controller="Category" asp-action="Create">New Category</a>
+    </div>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>DisplayOrder</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td>@obj.Id</td>
+                <td>@obj.Name</td>
+                <td>@obj.DisplayOrder</td>
+            </tr>
+        }
+    </tbody>
+</table>

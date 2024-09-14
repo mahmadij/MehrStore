@@ -1,20 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MehrStore.Data;
+using MehrStore.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MehrStore.Controllers
 {
     public class CategoryController : Controller
     {
+        private readonly ApplicationDbContext _db;
+        public CategoryController(ApplicationDbContext db)
+        {
+            _db = db;
+        }
         public IActionResult Index()
         {
-            return View();
+            List<Category> categories = _db.Categories.ToList();
+            return View(categories);
         }
-        public IActionResult Categories()
+        public IActionResult Create()
         {
             return View();
         }
-        public IActionResult Category()
+
+        [HttpPost]
+        public IActionResult Create(Category obj)
         {
-            return View();
+            _db.Categories.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
