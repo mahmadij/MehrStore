@@ -1,6 +1,7 @@
 ﻿using MehrStore.Data;
 using MehrStore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace MehrStore.Controllers
 {
@@ -24,9 +25,73 @@ namespace MehrStore.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            _db.Categories.Add(obj);
+            if ((obj.Name == obj.DisplayOrder.ToString()))
+            {
+                ModelState.AddModelError("Name", "Name and Display Order cannot be the same");
+            }
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
+                _db.SaveChanges();
+                TempData["Success"] = "Category created successfully!";
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Category categoryFromDB = _db.Categories.Find(id);
+            if (categoryFromDB == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDB);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Category obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Update(obj);
+                _db.SaveChanges();
+                TempData["Success"] = "Category updated successfully!";
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Category? categoryFromDB = _db.Categories.Find(id);
+
+            if (categoryFromDB == null )
+            {
+                return NotFound();
+            }
+            return View(categoryFromDB);
+        }
+
+        [HttpPost,ActionName("Delete")]
+        public IActionResult DeletePOST(int? id)
+        {
+            Category obj = _db.Categories.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _db.Categories.Remove(obj);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            TempData["Success"] = "Category deleted successfully!";
+            return RedirectToAction("Index");           
         }
     }
 }
