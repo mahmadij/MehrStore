@@ -1,5 +1,5 @@
-﻿using MehrStore.Data;
-using MehrStore.Models;
+﻿using Mehr.DataAccess.Data;
+using Mehr.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 

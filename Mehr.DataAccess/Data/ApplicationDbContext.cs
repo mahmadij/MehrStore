@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MehrStore.Models;
+using Mehr.Models;
 
-namespace MehrStore.Data
+namespace Mehr.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {

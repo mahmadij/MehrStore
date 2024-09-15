@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace MehrStore.Models
+namespace Mehr.Models
 {
     public class Category 
     {

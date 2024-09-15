@@ -1,4 +1,4 @@
-namespace MehrStore.Models
+namespace Mehr.Models
 {
     public class ErrorViewModel
     {

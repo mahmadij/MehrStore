@@ -1,2 +1,3 @@
-/MehrStore/Migrations/
+/Mehr.DataAccess/Migrations/
+/Mehr.DataAccess/Repository/
 appsettings.json

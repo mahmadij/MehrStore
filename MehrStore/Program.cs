@@ -1,4 +1,4 @@
-using MehrStore.Data;
+using Mehr.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
